@@ -33,7 +33,7 @@
     margin-bottom: 32px;
 }
 
-o#her-content a {
+#hero-content a {
     text-decoration: none;
     background-color: rgb(255, 251, 0);
     padding: 12px 24px;
@@ -44,6 +44,6 @@ o#her-content a {
     box-shadow: 2px 4px 8px rgb(68, 67, 67);
 }
 
-o#her-content a:hover {
+#hero-content a:hover {
     background-color: rgb(255, 238, 0);
 } 
