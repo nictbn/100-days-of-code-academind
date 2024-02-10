@@ -15,3 +15,7 @@ result /= 5;
 result *= 5;
 console.log(result);
 console.log("Max" + " Schwarzmueller");
+
+let userName = "Max";
+console.log(userName.length);
+console.log(userName.toUpperCase());
