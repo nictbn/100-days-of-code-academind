@@ -14,6 +14,15 @@ age = 45;
 adultYears = calculateAdultYears(age);
 alert(adultYears);
 
+let person = {
+    name: "Max",
+    greet() {
+        alert("Hello");
+    }
+}
+
+person.greet();
+
 function calculateAdultYears(age) {
     return age - 18;
 }
