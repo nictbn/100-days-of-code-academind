@@ -1,6 +1,6 @@
-let greetingText = "Hi, I'm Max!!!";
 let age = 32;
-alert(greetingText);
-greetingText = "Hi, I am really Max!";
-alert(greetingText);
-alert(age);
+let userName = "Max";
+let hobbies = ["Sports", "Cooking", "Reading"];
+let job = { title: "Developer", place: "New York", salary: 50000 };
+alert(hobbies);
+alert(hobbies[0]);
