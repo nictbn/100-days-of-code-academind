@@ -1,1 +1,1 @@
-document.body.children[1].children[0].href="https://google.com";
+document.body.children[2].children[0].href="https://google.com";
