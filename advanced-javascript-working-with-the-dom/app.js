@@ -18,3 +18,5 @@ firstParagraph.append(newAnchorElement);
 let firstH1Element = document.querySelector('h1');
 firstH1Element.remove();
 // firstH1Element.parentElement.removeChild(firstH1Element); For older browsers
+
+firstParagraph.parentElement.append(firstParagraph);
