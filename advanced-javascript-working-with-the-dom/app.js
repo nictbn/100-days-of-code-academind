@@ -20,3 +20,6 @@ firstH1Element.remove();
 // firstH1Element.parentElement.removeChild(firstH1Element); For older browsers
 
 firstParagraph.parentElement.append(firstParagraph);
+
+// firstParagraph.textContent = 'Hi! this is <strong>important!</strong>';
+firstParagraph.innerHTML = 'Hi! this is <strong>important!</strong>';
