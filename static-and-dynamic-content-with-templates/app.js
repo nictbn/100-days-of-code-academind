@@ -39,7 +39,10 @@ app.get('/restaurants/:id', function(req, res) {
             break;
         }
     }
-    res.render('restaurant-detail', {restaurant: foundRestaurant});
+    if (foundRestaurant === undefined) {
+        return res.render('404');  
+    }
+    return res.render('restaurant-detail', {restaurant: foundRestaurant});
 });
 
 app.get('/recommend', function(req, res) {
@@ -65,4 +68,9 @@ app.get('/about', function(req, res) {
     res.render('about');
 });
 
+
+// it's important that this 404 middleware is at the bottom of the page
+app.use(function(req, res) {
+    res.render('404');
+})
 app.listen(3000);
