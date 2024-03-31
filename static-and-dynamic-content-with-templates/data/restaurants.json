@@ -12,5 +12,12 @@
         "cuisine": "Indian",
         "website": "https://mysecondrestaurant.com",
         "description": "It's delicious"
+    },
+    {
+        "name": "Restaurant 3",
+        "address": "Restaurant 3, Street 3",
+        "cuisine": "Chinese",
+        "website": "https://testrestaurant3.com",
+        "description": "Because it's good"
     }
 ]
