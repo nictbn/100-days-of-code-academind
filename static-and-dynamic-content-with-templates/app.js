@@ -20,7 +20,8 @@ app.get('/restaurants', function(req, res) {
     const fileData = fs.readFileSync(filePath);
     const storedRestaurants = JSON.parse(fileData);
     let templateVariables = {
-        numberOfRestaurants: storedRestaurants.length
+        numberOfRestaurants: storedRestaurants.length,
+        restaurants: storedRestaurants
     };
     res.render('restaurants', templateVariables);
 });
