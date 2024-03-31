@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Test",
+        "address": "Test Street",
+        "cuisine": "Italian",
+        "website": "https://testrestaurant.com",
+        "description": "Good Food"
+    },
+    {
+        "name": "Test 2",
+        "address": " Test Street 2",
+        "cuisine": "Indian",
+        "website": "https://mysecondrestaurant.com",
+        "description": "It's delicious"
+    }
+]
