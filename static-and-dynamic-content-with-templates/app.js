@@ -1,7 +1,9 @@
-const fs = require('fs');
 const path = require('path');
+
 const express = require('express');
 const uuid = require('uuid');
+
+const restaurantData = require('./util/restaurant-data');
 
 const app = express();
 
@@ -17,23 +19,19 @@ app.get('/', function(req, res) {
 });
 
 app.get('/restaurants', function(req, res) {
-    const filePath = path.join(__dirname, 'data', 'restaurants.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedRestaurants = JSON.parse(fileData);
+    const restaurants = restaurantData.getStoredRestaurants();
     let templateVariables = {
-        numberOfRestaurants: storedRestaurants.length,
-        restaurants: storedRestaurants
+        numberOfRestaurants: restaurants.length,
+        restaurants: restaurants
     };
     res.render('restaurants', templateVariables);
 });
 
 app.get('/restaurants/:id', function(req, res) {
     const restaurantId = req.params.id;
-    const filePath = path.join(__dirname, 'data', 'restaurants.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedRestaurants = JSON.parse(fileData);
+    const restaurants = restaurantData.getStoredRestaurants();
     let foundRestaurant = undefined;
-    for (const restaurant of storedRestaurants) {
+    for (const restaurant of restaurants) {
         if (restaurant.id === restaurantId) {
             foundRestaurant = restaurant;
             break;
@@ -52,11 +50,9 @@ app.get('/recommend', function(req, res) {
 app.post('/recommend', function(req, res) {
     const restaurant = req.body;
     restaurant.id = uuid.v4();
-    const filePath = path.join(__dirname, 'data', 'restaurants.json');
-    const fileData = fs.readFileSync(filePath);
-    const storedRestaurants = JSON.parse(fileData);
-    storedRestaurants.push(restaurant);
-    fs.writeFileSync(filePath, JSON.stringify(storedRestaurants));
+    const restaurants = restaurantData.getStoredRestaurants();
+    restaurants.push(restaurant);
+    restaurantData.storeRestaurants(restaurants);
     res.redirect('/confirm');
 });
 
