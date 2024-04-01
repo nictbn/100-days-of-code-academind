@@ -4,10 +4,27 @@ const restaurantData = require('./../util/restaurant-data');
 const uuid = require('uuid');
 
 router.get('/restaurants', function(req, res) {
+    let order = req.query.order;
+    let nextOrder = 'desc';
+    if (order !== 'asc' && order !== 'desc') {
+        order = 'asc';
+    }
+    if (order === 'desc') {
+        nextOrder = 'asc';
+    }
     const restaurants = restaurantData.getStoredRestaurants();
+
+    restaurants.sort(function(first, second) {
+        if ((order === 'asc' && first.name > second.name) || (order === 'desc' && second.name > first.name)) {
+            return 1;
+        }
+        return -1;
+    });
+
     let templateVariables = {
         numberOfRestaurants: restaurants.length,
-        restaurants: restaurants
+        restaurants: restaurants,
+        nextOrder: nextOrder
     };
     res.render('restaurants', templateVariables);
 });
