@@ -72,5 +72,11 @@ app.get('/about', function(req, res) {
 // it's important that this 404 middleware is at the bottom of the page
 app.use(function(req, res) {
     res.render('404');
-})
+});
+
+app.use(function(error, req, res, next) {
+    res.render('500');
+});
+
+
 app.listen(3000);
