@@ -17,3 +17,6 @@ console.log(sumUp(1, 5, 10, 11, 20, 31));
 
 const inputNumbers = [1, 5, 10, 11, 20, 31];
 console.log(sumUp(...inputNumbers));
+
+sumUp.someProperty = 'what what?';
+console.log(sumUp);
