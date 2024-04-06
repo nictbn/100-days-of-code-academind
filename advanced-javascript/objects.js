@@ -28,3 +28,12 @@ const developer = new Job('Developer', 'New York', 50000);
 const cook = new Job('Cook', 'Munich', 35000);
 developer.describe();
 cook.describe();
+
+const input = ['Max', 'Schwarz'];
+const [first, last] = input;
+console.log(first);
+console.log(last);
+
+const aJob = new Job('Developer', 'New York', 50000);
+const {title, location: place, salary} = aJob;
+console.log(title, place, salary);
