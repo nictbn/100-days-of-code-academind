@@ -4,6 +4,13 @@ const express = require('express');
 
 const blogRoutes = require('./routes/blog');
 
+const {pool, initializeDatabase} = require('./data/database');
+
+const prepareDB = async function() {
+  await initializeDatabase();
+}
+prepareDB();
+
 const app = express();
 
 // Activate EJS view engine
