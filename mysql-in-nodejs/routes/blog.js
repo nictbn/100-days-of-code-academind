@@ -64,7 +64,7 @@ router.get('/posts/:id/edit', async function(req, res) {
         return res.status(404).render('404');
     }
     res.render('update-post', { post: posts[0] });
-})
+});
 
 router.post('/posts/:id/edit', async function(req, res) {
     const query = `
@@ -73,7 +73,12 @@ router.post('/posts/:id/edit', async function(req, res) {
     `
     await db.query(query, [req.body.title, req.body.summary, req.body.content, req.params.id]);
     res.redirect('/posts');
-})
+});
+
+router.post('/posts/:id/delete', async function(req, res) {
+    await db.query('DELETE FROM posts WHERE id = ?', [req.params.id]);
+    res.redirect('/posts')
+});
 
 
 module.exports = router;
