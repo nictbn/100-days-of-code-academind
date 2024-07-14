@@ -23,7 +23,7 @@ app.use(function (error, req, res, next) {
   res.status(500).render('500');
 });
 
-db.connectToDatabase().then(function () {
+db.connectToDatabase().then(db.initializeAuthors).then(function () {
   app.listen(3000);
 });
 
