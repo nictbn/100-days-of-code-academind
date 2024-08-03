@@ -48,8 +48,7 @@ async function saveComment(event) {
     event.preventDefault();
     const enteredTitle = commentTitleElement.value;
     const enteredText = commentTextElement.value;
-    console.log(enteredTitle, enteredText);
-
+    const comment = {title: enteredTitle, text: enteredText};
     const postid = commentsFormElement.dataset.postid;
 
     try {
