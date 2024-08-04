@@ -103,7 +103,7 @@ router.get('/admin', async function (req, res) {
 
   const user = await db.getDb().collection('users').findOne({_id: ObjectId.createFromHexString(req.session.user.id)});
   if (!user || !user.isAdmin) {
-    res.status(403).render('403');
+    return res.status(403).render('403');
   }
 
   res.render('admin');
