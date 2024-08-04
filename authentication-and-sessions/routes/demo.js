@@ -53,7 +53,17 @@ router.post('/signup', async function (req, res) {
 
   if (existingUser) {
     console.log('USer exists already');
-    return res.redirect('/signup');
+    req.session.inputData = {
+      hasError: true,
+      message: 'User already exists!',
+      email: enteredEmail,
+      confirmEmail: enteredConfirmEmail,
+      password: enteredPassword
+    }
+    req.session.save(function() {
+      res.redirect('/signup');
+    });
+    return;
   }
 
   const hashedPassword = await bcrypt.hash(enteredPassword, 12);
