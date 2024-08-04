@@ -1,4 +1,5 @@
 const path = require('path');
+const { ObjectId } = require('mongodb');
 
 const express = require('express');
 const session = require('express-session');
@@ -32,6 +33,21 @@ app.use(session({
     maxAge: 30 * 24 * 60 * 60 * 1000
   }
 }));
+
+app.use(async function(req, res, next) {
+  const isAuth = req.session.isAuthenticated;
+  const user = req.session.user;
+  
+  if (!user || !isAuth) {
+    return next();
+  }
+  const userDoc = await db.getDb().collection('users').findOne({_id: ObjectId.createFromHexString(user.id)});
+  const isAdmin = userDoc.isAdmin;
+
+  res.locals.isAuth = isAuth;
+  res.locals.isAdmin = isAdmin;
+  next();
+})
 
 app.use(demoRoutes);
 
