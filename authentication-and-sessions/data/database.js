@@ -1,4 +1,5 @@
 const mongodb = require('mongodb');
+const bcrypt = require('bcryptjs');
 
 const MongoClient = mongodb.MongoClient;
 
@@ -18,7 +19,19 @@ function getDb() {
   return database;
 }
 
+async function initializeAdminUser() {
+  if (await database.collection('users').count() === 0 ) {
+    console.log('Creating admin user')
+    const enteredPassword = 'topsecret' // just for demo purposes
+    const hashedPassword = await bcrypt.hash(enteredPassword, 12);
+    await database.collection('users').insertOne({email: 'admin@test.com', password: hashedPassword, isAdmin: true});
+  } else {
+    console.log('The db has users already, will not add an admin user');
+  }
+}
+
 module.exports = {
   connectToDatabase: connectToDatabase,
   getDb: getDb,
+  initializeAdminUser: initializeAdminUser,
 };

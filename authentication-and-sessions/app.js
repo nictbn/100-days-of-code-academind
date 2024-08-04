@@ -39,6 +39,6 @@ app.use(function(error, req, res, next) {
   res.render('500');
 })
 
-db.connectToDatabase().then(function () {
+db.connectToDatabase().then(db.initializeAdminUser).then(function () {
   app.listen(3000);
 });
