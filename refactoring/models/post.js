@@ -9,6 +9,25 @@ class Post {
         }
     }
 
+    static async fetchAll() {
+        const postDocuments = await db.getDb().collection('posts').find().toArray();
+        const posts = []
+        for (const document of postDocuments) {
+            const post = new Post(document.title, document.content, document._id.toString());
+            posts.push(post);
+        }
+        return posts;
+    }
+
+    async fetch() {
+        if (!this.id) {
+            return;
+        }
+        const postDocument = await db.getDb().collection('posts').findOne({ _id: this.id });
+        this.title = postDocument.title;
+        this.content = postDocument.content;
+    }
+
     async upsert() {
         let result;
         if (this.id) {
