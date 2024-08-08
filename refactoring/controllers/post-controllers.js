@@ -3,7 +3,7 @@ const validationSession = require('../util/validation-session');
 const validation = require('../util/validation');
 
 function getHomePage(req, res) {
-    res.render('welcome', { csrfToken: req.csrfToken() });
+    res.render('welcome');
 }
 
 async function getAdminPage(req, res) {
@@ -21,7 +21,6 @@ async function getAdminPage(req, res) {
     res.render('admin', {
       posts: posts,
       inputData: sessionErrorData,
-      csrfToken: req.csrfToken(),
     });
 }
 
@@ -63,7 +62,6 @@ async function createPost(req, res) {
     res.render('single-post', {
       post: post,
       inputData: sessionErrorData,
-      csrfToken: req.csrfToken(),
     });
 }
 
