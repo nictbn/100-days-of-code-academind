@@ -116,13 +116,17 @@ function logout(req, res) {
     req.session.user = null;
     req.session.isAuthenticated = false;
     res.redirect('/');
-  }
+}
+
+function get401(req, res) {
+    res.status(401).render('401');
+}
 
 module.exports = {
     getSignup: getSignup,
     getLogin: getLogin,
     signup: signup,
     login: login,
-    logout: logout
-
+    logout: logout,
+    get401: get401,
 }

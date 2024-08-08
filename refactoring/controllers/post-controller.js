@@ -7,10 +7,6 @@ function getHomePage(req, res) {
 }
 
 async function getAdminPage(req, res) {
-    if (!res.locals.isAuth) {
-      return res.status(401).render('401');
-    }
-  
     const posts = await Post.fetchAll();
 
     sessionErrorData = validationSession.getSessionErrorData(req, {
