@@ -90,7 +90,7 @@ async function deletePost(req, res) {
     const post = new Post(null, null, req.params.id);
     await post.delete();
     res.redirect('/admin');
-  }
+}
 
 module.exports = {
     getHomePage: getHomePage,
