@@ -3,7 +3,7 @@ function getSignup(req, res) {
 }
 
 function signup(req, res) {
-
+    
 }
 
 function getLogin(req, res) {
