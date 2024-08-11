@@ -40,4 +40,5 @@ module.exports = {
     getSignup: getSignup,
     signup: signup,
     getLogin: getLogin,
+    login: login,
 }
