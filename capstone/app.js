@@ -8,6 +8,7 @@ const db = require('./data/database');
 const addCsrfTokenMiddleware = require('./middlewares/csrf-tokens');
 const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
+const User = require('./models/user.model');
 
 const authRoutes = require('./routes/auth.routes');
 const productRoutes = require('./routes/products.routes');
@@ -32,7 +33,7 @@ app.use(authRoutes);
 app.use(productRoutes);
 
 app.use(errorHandlerMiddleware);
-db.connectToDatabase().then(function() {
+db.connectToDatabase().then(User.createDefaultAdminIfMissing).then(function() {
     app.listen(3000);
 }).catch(function(error) {
     console.log('Failed to connect to the database');

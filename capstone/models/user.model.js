@@ -3,6 +3,26 @@ const db = require('../data/database');
  
 
 class User {
+    
+    static async createDefaultAdminIfMissing() {
+        if (await db.getDb().collection('users').count() > 0) {
+            return;
+        }
+        const password = 'classified';
+        const hashedPassword = await bcrypt.hash(password, 12);
+        await db.getDb().collection('users').insertOne({
+            email: 'test@test.com',
+            password: hashedPassword,
+            name: 'Super Admin',
+            address: {
+                street: 'Admin Street',
+                postalCode: '12345',
+                city: 'Admin City',
+            },
+            isAdmin: true,
+        });
+    }
+
     constructor(email, password, fullname, street, postal, city) {
         this.email = email;
         this.password = password;
