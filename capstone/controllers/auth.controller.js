@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const authUtil = require('../util/authentication');
+const validation = require('../util/validation');
 
 
 function getSignup(req, res) {
@@ -7,9 +8,26 @@ function getSignup(req, res) {
 }
 
 async function signup(req, res, next) {
-    const user = new User(req.body.email, req.body.password, req.body.fullname, req.body.street, req.body.postal, req.body.city);
+    if (!validation.userDetailsAreValid(
+        req.body.email, 
+        req.body.password, 
+        req.body.fullname, 
+        req.body.street,
+        req.body.postal, 
+        req.body.city
+    ) || !validation.emailIsConfirmed(req.body.email, req.body['confirm-email'])) {
+        res.redirect('/signup');
+        return;
+    }
 
+    const user = new User(req.body.email, req.body.password, req.body.fullname, req.body.street, req.body.postal, req.body.city);
+    
     try {
+        const existsAlready = await user.existsAlready();
+        if (existsAlready) {
+            res.redirect('/signup');
+            return;
+        }
         await user.signup();
     } catch(error) {
         next(error);
