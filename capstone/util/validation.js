@@ -7,7 +7,7 @@ function userCredentialsAreValid(email, password) {
 }
 
 function userDetailsAreValid(email, password, name, street, postal, city) {
-    userCredentialsAreValid(email, password) &&
+    return userCredentialsAreValid(email, password) &&
     !isEmpty(name) && 
     !isEmpty(street) && 
     !isEmpty(postal) && 
