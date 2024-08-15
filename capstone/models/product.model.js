@@ -1,6 +1,14 @@
 const db = require('../data/database');
 
 class Product {
+    
+    static async findAll() {
+        const products = await db.getDb().collection('products').find().toArray();
+        return products.map(function(productDocument) {
+            return new Product(productDocument);
+        });
+    }
+
     constructor(productData) {
         this.title = productData.title;
         this.summary = productData.summary;
@@ -8,7 +16,10 @@ class Product {
         this.description = productData.description; // more specifically, the name of the image
         this.image = productData.image;
         this.imagePath = `product-data/images/${productData.image}`;
-        this.imageUrl = `/products/assets/images/${productData.image};`
+        this.imageUrl = `/products/assets/images/${productData.image}`;
+        if (productData._id) {
+            this.id = productData._id.toString();
+        }
     }
 
     async save() {
