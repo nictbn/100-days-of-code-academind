@@ -4,8 +4,9 @@ class Product {
     constructor(productData) {
         this.title = productData.title;
         this.summary = productData.summary;
-        this.price = productData.price;
-        this.description = productData.image; // more specifically, the name of the image
+        this.price = +productData.price;
+        this.description = productData.description; // more specifically, the name of the image
+        this.image = productData.image;
         this.imagePath = `product-data/images/${productData.image}`;
         this.imageUrl = `/products/assets/images/${productData.image};`
     }
