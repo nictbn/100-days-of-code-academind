@@ -17,6 +17,11 @@ async function addCartItem(req, res, next) {
     });
 }
 
+function getCart(req, res, next) {
+    res.render('customer/cart/cart');
+}
+
 module.exports = {
     addCartItem: addCartItem,
+    getCart: getCart,
 }
