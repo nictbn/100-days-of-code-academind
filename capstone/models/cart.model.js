@@ -23,7 +23,7 @@ class Cart {
                 return;
             }
         }
-        this.items.push(product);
+        this.items.push(cartItem);
         this.totalQuantity = this.totalQuantity + 1;
         this.totalPrice = this.totalPrice + product.price;
     }

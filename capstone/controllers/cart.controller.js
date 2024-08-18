@@ -4,7 +4,6 @@ async function addCartItem(req, res, next) {
     let product;
     try {
         product = await Product.findById(req.body.productId);
-        res.locals.cart.addCartItem();
     } catch(error) {
         next(error);
         return;
