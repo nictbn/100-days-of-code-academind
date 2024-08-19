@@ -11,6 +11,7 @@ const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const protectRoutes = require('./middlewares/protect-routes');
 const cartMiddleware = require('./middlewares/cart');
 const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
+const notFoundMiddleware = require('./middlewares/not-found');
 const User = require('./models/user.model');
 
 const authRoutes = require('./routes/auth.routes');
@@ -43,11 +44,11 @@ app.use(baseRoutes);
 app.use(authRoutes);
 app.use(productRoutes);
 app.use('/cart', cartRoutes);
-app.use(protectRoutes);
-app.use('/admin', adminRoutes);
-app.use('/orders', orderRoutes);
 
+app.use('/admin', protectRoutes, adminRoutes);
+app.use('/orders', protectRoutes, orderRoutes);
 
+app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 db.connectToDatabase().then(User.createDefaultAdminIfMissing).then(function() {
     app.listen(3000);
