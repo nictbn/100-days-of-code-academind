@@ -2,7 +2,7 @@ const db = require('../data/database');
 const mongodb = require('mongodb');
 
 class Product {
-    
+
     static async findAll() {
         const products = await db.getDb().collection('products').find().toArray();
         return products.map(function(productDocument) {
@@ -25,8 +25,7 @@ class Product {
             error.code = 404;
             throw error;
         }
-        const product = new Product(productDocument);
-        return product;
+        return new Product(productDocument);
     }
 
     constructor(productData) {
@@ -34,11 +33,23 @@ class Product {
         this.summary = productData.summary;
         this.price = +productData.price;
         this.description = productData.description; 
-        this.image = productData.image; // more specifically, the name of the image
+        this.image = productData.image; // the name of the image
         this.updateImageData();
         if (productData._id) {
             this.id = productData._id.toString();
         }
+    }
+
+    
+    static async findMultiple(ids) {
+        const productIds = ids.map(function(id) {
+            return new mongodb.ObjectId(id);
+        })
+        
+        const products = await db.getDb().collection('products').find({_id: { $in: productIds }}).toArray();
+        return products.map(function (productDocument) {
+            return new Product(productDocument);
+        });
     }
 
     updateImageData() {

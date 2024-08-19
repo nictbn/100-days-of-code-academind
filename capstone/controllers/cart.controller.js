@@ -23,7 +23,7 @@ function getCart(req, res, next) {
 
 function updateCartItem(req, res, next) {
     const cart = res.locals.cart;
-    const updatedItemData = cart.updateItem(req.body.productId, req.body.quantity);
+    const updatedItemData = cart.updateItem(req.body.productId, +req.body.quantity);
     req.session.cart = cart;
     res.json({
         message: 'Item updated!',
@@ -32,7 +32,7 @@ function updateCartItem(req, res, next) {
             newTotalPrice: cart.totalPrice,
             updatedItemPrice: updatedItemData.updatedItemPrice,
         }
-    })
+    });
 }
 
 module.exports = {
