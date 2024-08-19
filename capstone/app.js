@@ -17,6 +17,7 @@ const productRoutes = require('./routes/products.routes');
 const baseRoutes = require('./routes/base.routes');
 const adminRoutes = require('./routes/admin.routes');
 const cartRoutes = require('./routes/cart.routes');
+const orderRoutes = require('./routes/order.routes');
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use(productRoutes);
 app.use('/cart', cartRoutes);
 // app.use(protectRoutes);
 app.use('/admin', adminRoutes);
+app.use('/orders', orderRoutes);
 
 
 app.use(errorHandlerMiddleware);

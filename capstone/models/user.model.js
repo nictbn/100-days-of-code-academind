@@ -1,9 +1,14 @@
 const bcrypt = require('bcryptjs');
+const mongodb = require('mongodb');
+
 const db = require('../data/database');
- 
+
 
 class User {
-    
+    static findById(userId) {
+        const uid = new mongodb.ObjectId(userId);
+        return db.getDb().collection('users').findOne({_id: uid}, { projection: { password: 0 } });
+    }
     static async createDefaultAdminIfMissing() {
         if (await db.getDb().collection('users').count() > 0) {
             return;
@@ -59,6 +64,8 @@ class User {
     hasMatchingPassword(hashedPassword) {
         return bcrypt.compare(this.password, hashedPassword);
     }
+
+
 }
 
 module.exports = User;
