@@ -5,11 +5,11 @@ const db = require('../data/database');
 class Todo {
     static async getAllTodos() {
         const todoDocuments = await db.getDb().collection('todos').find().toArray();
-        todoDocuments.map(function(todoDocument) {
-            return new Todo(todoDocument._id, todoDocument.text)
+        return todoDocuments.map(function(todoDocument) {
+            return new Todo(todoDocument.text, todoDocument._id);
         });
     }
-    
+
     constructor(text, id) {
         this.text = text;
         this.id = id;
