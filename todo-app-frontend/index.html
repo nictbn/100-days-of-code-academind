@@ -27,7 +27,7 @@
         <ul v-else id="todos-list">
           <li v-for="todo in todos">
             <p>{{ todo.text }}</p>
-            <button>Edit</button>
+            <button @click="startEditTodo(todo.id)">Edit</button>
             <button>Delete</button>
           </li>
         </ul>
