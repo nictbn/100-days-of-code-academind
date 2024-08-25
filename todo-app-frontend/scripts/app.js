@@ -1,15 +1,19 @@
 const TodosApp = {
     data() {
         return {
-            newTodo: 'Learn Vue.js',
-            enteredTodoText: 'New Todo...'
+            todos: [],
+            enteredTodoText: '',
         };
     },
 
     methods: {
         saveTodo(event) {
             event.preventDefault();
-            this.newTodo = this.enteredTodoText;
+            const newTodo = {
+                text: this.enteredTodoText,
+                id: new Date().toISOString()
+            };
+            this.todos.push(newTodo);
             this.enteredTodoText = '';
         }
     }
