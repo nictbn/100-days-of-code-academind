@@ -24,6 +24,28 @@ const TodosApp = {
 
                 this.todos[todoIndex] = updatedTodoItem;
                 this.editedTodoId = null;
+
+                let response;
+
+                try {
+                    response = await fetch('http://localhost:3000/todos/' + todoId, {
+                    method: 'PATCH',
+                    body: JSON.stringify({
+                        newText: this.enteredTodoText,
+                    }),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    });
+                } catch (error) {
+                    alert('Something went wrong!');
+                    return;
+                }
+
+                if (!response.ok) {
+                    alert('Something went wrong!');
+                    return;
+                }
             } else {
 
                 let response;
@@ -66,10 +88,26 @@ const TodosApp = {
             });
             this.enteredTodoText = todo.text;
         },
-        deleteTodo(todoId) {
+        async deleteTodo(todoId) {
             this.todos = this.todos.filter(function(todoItem) {
                 return todoItem.id !== todoId;
             });
+
+            let response;
+
+            try {
+                response = await fetch('http://localhost:3000/todos/' + todoId, {
+                method: 'DELETE',
+                });
+            } catch (error) {
+                alert('Something went wrong!');
+                return;
+            }
+
+            if (!response.ok) {
+                alert('Something went wrong!');
+                return;
+            }
         }
     },
     async created() {
